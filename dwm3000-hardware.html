@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DWM3000EVB 부품 구성 | 스마트헤드폰 UWB 조사</title><link rel="stylesheet" href="research.css"><link rel="stylesheet" href="hardware-assets/guide.css"></head>
+<body><header><a href="index.html#hardware-guides">← 후보별 구성도</a><a href="dwm3000.html">이 후보의 설계·시험 검토 ↗</a></header><main class="guide">
+<div class="intro"><small>스마트헤드폰 · UWB 하드웨어</small><h1>DWM3000EVB</h1><h2>기존 헤드폰의 UWB 자리에서 거리를 재는 구성</h2><p>평가할 때는 실드와 외부 MCU를 결합한다. 이어컵에 옮기는 부품은 실드 위의 23 × 13 × 2.9 mm DWM3000이다.</p></div>
+<div class="gallery"><figure><a href="hardware-assets/dwm3000evb.webp"><img src="hardware-assets/dwm3000evb.webp" alt="DWM3000EVB 실드와 DWM3000 모듈. 양옆 헤더로 외부 호스트에 연결한다."></a><figcaption>DWM3000EVB 실드와 DWM3000 모듈. 양옆 헤더로 외부 호스트에 연결한다.</figcaption></figure></div>
+<section><h2>구성 부품과 역할</h2><div class="parts"><div><small>실장 모듈</small><h3>DWM3000</h3><p>DW3110과 세라믹 UWB 안테나가 한 모듈에 들어 있다. 단일 안테나로 송수신 시각을 측정한다.</p></div>
+<div><small>평가 실드 1장</small><h3>DWM3000EVB</h3><p>Arduino 헤더가 SPI·IRQ·리셋 신호를 꺼내 준다. 3.3 V 변환기와 전원 선택 점퍼로 평가 전원 공급과 소비전류 측정이 가능하다.</p></div>
+<div><small>별도 준비</small><h3>호스트 MCU와 상대 노드</h3><p>nRF52840 DK 같은 호스트가 측정 순서를 실행한다. 상대 노드가 응답해야 두 장치 사이의 거리를 얻는다.</p></div></div></section>
+<section><h2>측정값이 만들어지는 과정</h2><ol class="pathway"><li>외부 MCU가 SPI로 송신 예약</li><li>DW3110과 상대 노드가 프레임 교환</li><li>왕복 시간으로 거리 계산</li></ol><p>헤드폰에는 기존 ATmega328P와 U4 BMI270을 활용한다. DWM1000과 패드 외형은 호환되지만 전원 핀과 드라이버를 확인해야 한다. 단일 실드에서 태그의 도래각은 얻을 수 없다.</p></section>
+<section><h2>프로젝트에서 확인할 항목</h2><p>실드에서 거리 로그를 확보한 뒤 AVR로 이식한다. 기존 앵커와 채널 5·프레임·응답 지연을 맞춰 시험한다. iOS는 Nordic 호스트와 호환 NI 펌웨어 조합이 필요하며 Android의 기존 AVR용 완성 앱은 미확인이다.</p><div class="refs"><a href="dwm3000.html#migration">DWM1000 설계 변경 절차</a>
+<a href="dwm3000.html#tests">후보별 시험 순서</a>
+<a href="protocol.html#shared-pairs">공유 앵커와 기기별 반환 시험</a></div></section>
+<section><h2>사양 및 이미지 출처</h2><div class="refs"><a href="https://www.qorvo.com/products/ek/DWM3000EVB">Qorvo 실드 구성</a>
+<a href="https://www.qorvo.com/products/p/DWM3000">Qorvo 모듈 사양</a>
+<a href="https://homesmartmesh.github.io/protocols/ultrawideband/#dwm3000-evb">실드 사진 · Home Smart Mesh</a></div></section></main></body></html>

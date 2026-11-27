@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DW3220 부품 구성 | 스마트헤드폰 UWB 조사</title><link rel="stylesheet" href="research.css"><link rel="stylesheet" href="hardware-assets/guide.css"></head>
+<body><header><a href="index.html#hardware-guides">← 후보별 구성도</a><a href="dw3220.html">이 후보의 설계·시험 검토 ↗</a></header><main class="guide">
+<div class="intro"><small>스마트헤드폰 · UWB 하드웨어</small><h1>DW3220</h1><h2>두 안테나의 위상차로 입사각을 구하는 구성</h2><p>DW3220은 5 × 5 mm QFN 패키지의 UWB 송수신 IC다. 이 치수에는 안테나, MCU, 기준 클록, 전원 회로가 포함되지 않는다. 신규 설계에서는 제외하고 보유품 평가 대상으로 다룬다.</p></div>
+<div class="gallery"><figure><a href="hardware-assets/dw3220-array.png"><img src="hardware-assets/dw3220-array.png" alt="두 안테나와 호스트의 관계를 그린 개념도. 실제 안테나 간격·배선·부품 배치는 실장 보드 설계에 따른다."></a><figcaption>두 안테나와 호스트의 관계를 그린 개념도. 실제 안테나 간격·배선·부품 배치는 실장 보드 설계에 따른다.</figcaption></figure></div>
+<section><h2>구성 부품과 역할</h2><div class="parts"><div><small>송수신 IC</small><h3>DW3220</h3><p>두 RF 포트에서 받은 신호의 위상차(PDoA)를 측정할 수 있다. 채널 5와 9를 지원한다.</p></div>
+<div><small>외부 RF 설계</small><h3>안테나 2개와 정합 회로</h3><p>안테나의 간격과 축이 각도 해석의 기준이다. 경로별 위상 오프셋을 실제 보드·케이스에서 보정해야 각도 추정에 쓸 수 있다.</p></div>
+<div><small>외부 제어부</small><h3>MCU·클록·전원</h3><p>호스트가 SPI로 IC를 설정하고 거리·위상차를 읽는다. 펌웨어가 보정값을 적용하고 결과를 게이트웨이에 전달한다.</p></div></div></section>
+<section><h2>측정값이 만들어지는 과정</h2><ol class="pathway"><li>같은 프레임을 두 RF 경로로 수신</li><li>두 경로의 위상차 측정</li><li>보정값과 배열 기하로 도래각 추정</li></ol><p>안테나 배열을 고정 앵커에 배치하면 앵커 기준의 태그 방향을 얻는다. 두 안테나만으로 방위각·고도각 모두를 결정할 수 있다고 가정하면 안 된다. 헤드폰 내장 시에는 별도 RF 기판과 기존 U4가 필요하다.</p></section>
+<section><h2>프로젝트에서 확인할 항목</h2><p>보유 보드의 칩 표시와 안테나 경로부터 확인한다. 고정 거리에서 알려진 각도로 태그를 옮겨 각도 오차를 기록한다. iOS·Android 전용 앱은 특정 실장 보드와 펌웨어 조합이 미확인이다. Qorvo가 공지한 최종 주문일은 2027년 2월 28일이며, 대체 시 PCB·RF 재검증이 필요하다.</p><div class="refs"><a href="dw3220.html#migration">DWM1000 설계 변경 절차</a>
+<a href="dw3220.html#tests">후보별 시험 순서</a>
+<a href="protocol.html#shared-pairs">공유 앵커와 기기별 반환 시험</a></div></section>
+<section><h2>사양 및 이미지 출처</h2><div class="refs"><a href="https://www.qorvo.com/products/p/DW3220">Qorvo DW3220 사양</a>
+<a href="https://forum.qorvo.com/t/dw3220-eol-replacement-compatability/27053">Qorvo 단종·대체 안내</a></div></section></main></body></html>
